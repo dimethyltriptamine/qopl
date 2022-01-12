@@ -106,7 +106,11 @@ do_primitive(StackVM *vm)
 		printf("Dividing %i %i\n",vm->memory[vm->sp - 1],
 			  vm->memory[vm->sp]
 			);
-		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] * vm->memory[vm->sp];
+		if(vm->memory[vm->sp] == 0) {
+			printf("Not gonna divide by 0\n");
+			break;
+		}
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] / vm->memory[vm->sp];
 		vm->sp--;
 		break;
 
