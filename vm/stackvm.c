@@ -16,7 +16,7 @@
 StackVM
 *init_vm()
 {
-	i32 *memory = (i32*)malloc(1000000);
+	i32 *memory = malloc(1000000);
 	StackVM *vm = malloc(sizeof(StackVM));
 	
 	vm->pc  = 100;
