@@ -87,6 +87,29 @@ do_primitive(StackVM *vm)
 		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] + vm->memory[vm->sp];
 		vm->sp--;
 		break;
+	case 2: /* substract */
+		printf("Substracting %i %i\n",vm->memory[vm->sp - 1],
+			  vm->memory[vm->sp]
+			);
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] - vm->memory[vm->sp];
+		vm->sp--;
+		break;
+
+	case 3: /* multiply */
+		printf("Multiplying %i %i\n",vm->memory[vm->sp - 1],
+			  vm->memory[vm->sp]
+			);
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] * vm->memory[vm->sp];
+		vm->sp--;
+		break;
+	case 4: /* divide */
+		printf("Dividing %i %i\n",vm->memory[vm->sp - 1],
+			  vm->memory[vm->sp]
+			);
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] * vm->memory[vm->sp];
+		vm->sp--;
+		break;
+
 	}
 
 }

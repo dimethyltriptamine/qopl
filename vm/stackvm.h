@@ -2,8 +2,6 @@
 #define STACK_VM_H
 #include <stdint.h>
 
-#include "list.h"
-
 typedef int32_t i32;
 
 typedef struct StackVM {
