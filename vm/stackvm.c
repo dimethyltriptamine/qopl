@@ -35,6 +35,7 @@ get_type(i32 instruction)
 	i32 type = 0xC0000000;
 	type = (type & instruction) >> 30;
 	return type;
+
 }
 
 i32
@@ -56,6 +57,7 @@ decode(StackVM *vm)
 {
 	vm->typ = get_type(vm->memory[vm->pc]);
 	vm->dat = get_data(vm->memory[vm->pc]);
+
 }
 
 void
@@ -74,46 +76,42 @@ void
 do_primitive(StackVM *vm)
 {
 	switch(vm->dat) {
-		case 0: /* halt */
-			printf("halted\n");
-			vm->running = 0;
+	case 0: /* halt */
+		printf("halted\n");
+		vm->running = 0;
+		break;
+	case 1: /* add */
+		printf("Adding %i %i\n",vm->memory[vm->sp - 1],
+			  vm->memory[vm->sp]
+			);
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] + vm->memory[vm->sp];
+		vm->sp--;
+		break;
+	case 2: /* substract */
+		printf("Substracting %i %i\n",vm->memory[vm->sp - 1],
+			  vm->memory[vm->sp]
+			);
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] - vm->memory[vm->sp];
+		vm->sp--;
+		break;
+	case 3: /* multiply */
+		printf("Multiplying %i %i\n",vm->memory[vm->sp - 1],
+			  vm->memory[vm->sp]
+			);
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] * vm->memory[vm->sp];
+		vm->sp--;
+		break;
+	case 4: /* divide */
+		printf("Dividing %i %i\n",vm->memory[vm->sp - 1],
+			  vm->memory[vm->sp]
+			);
+		if(vm->memory[vm->sp] == 0) {
+			printf("Not gonna divide by 0\n");
 			break;
-		case 1: /* add */
-			printf("Adding %i %i\n",
-				  vm->memory[vm->sp - 1],
-				  vm->memory[vm->sp]);
-			vm->memory[vm->sp - 1] =
-				vm->memory[vm->sp - 1] + vm->memory[vm->sp];
-			vm->sp--;
-			break;
-		case 2: /* substract */
-			printf("Substracting %i %i\n",
-				  vm->memory[vm->sp - 1],
-				  vm->memory[vm->sp]);
-			vm->memory[vm->sp - 1] =
-				vm->memory[vm->sp - 1] - vm->memory[vm->sp];
-			vm->sp--;
-			break;
-		case 3: /* multiply */
-			printf("Multiplying %i %i\n",
-				  vm->memory[vm->sp - 1],
-				  vm->memory[vm->sp]);
-			vm->memory[vm->sp - 1] =
-				vm->memory[vm->sp - 1] * vm->memory[vm->sp];
-			vm->sp--;
-			break;
-		case 4: /* divide */
-			printf("Dividing %i %i\n",
-				  vm->memory[vm->sp - 1],
-				  vm->memory[vm->sp]);
-			if(vm->memory[vm->sp] == 0) {
-				printf("Not gonna divide by 0\n");
-				break;
-			}
-			vm->memory[vm->sp - 1] =
-				vm->memory[vm->sp - 1] / vm->memory[vm->sp];
-			vm->sp--;
-			break;
+		}
+		vm->memory[vm->sp - 1] = vm->memory[vm->sp - 1] / vm->memory[vm->sp];
+		vm->sp--;
+		break;
 	}
 }
 
@@ -127,6 +125,7 @@ run(StackVM *vm)
 		execute(vm);
 		printf("ToS: %i\n", vm->memory[vm->sp]);
 	}
+
 }
 
 void
@@ -134,4 +133,11 @@ run_program(StackVM *vm, i32 *prog, int size)
 {
 	for(i32 i = 0; i < size; i++)
 		vm->memory[vm->pc + i] = prog[i];
+}
+
+void
+destroy_vm(StackVM *vm)
+{
+	free(vm->memory);
+	free(vm);
 }

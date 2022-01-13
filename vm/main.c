@@ -17,5 +17,6 @@ main(void)
 	int size = sizeof(prog) / sizeof(i32);
 	run_program(vm, prog, size);
 	run(vm);
+	destroy_vm(vm);
 	return 0;
 }

@@ -47,4 +47,7 @@ run(StackVM *vm);
 void
 run_program(StackVM *vm, i32 *prog, int size);
 
+void
+destroy_vm(StackVM *vm);
+
 #endif
