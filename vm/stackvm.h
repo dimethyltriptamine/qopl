@@ -4,26 +4,25 @@
 
 typedef int32_t i32;
 
-typedef struct StackVM {
-	i32 pc; /* program counter  */
-	i32 sp; /* stack pointer */
+typedef struct StackVM
+{
+	i32 pc;	   /* program counter  */
+	i32 sp;	   /* stack pointer */
 	i32 *memory; /* i32 allocated mem */
 	i32 typ;
 	i32 dat;
 	i32 running;
-	
 
-}StackVM;
+} StackVM;
 
 /* Who needs OOP anyways? */
-
 
 /* As, thanfully, C doesn't have RAII, a init function is necessary,
  * so it inits the struct with all the necessary values and data.
  */
 
-StackVM
-*init_vm();
+StackVM *
+init_vm();
 
 i32
 get_type(i32 instruction);
@@ -47,6 +46,5 @@ run(StackVM *vm);
 
 void
 run_program(StackVM *vm, i32 *prog, int size);
-
 
 #endif
