@@ -1,5 +1,9 @@
 # qopl --- qorg's own psychedelic language
 
+psychedelic: 1. Of, containing, generating, or reminiscent of
+drug-induced hallucinations, distortions of perception, altered
+awareness etc. Synonyms: lysergic, trippy
+
 This document is the specification of the qorg's own psychedelic
 language. This language was created to 1) save me from boredom, 2)
 show the kids[^1] how a programming language is designed 3) So i learn
