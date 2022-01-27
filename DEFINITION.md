@@ -19,6 +19,15 @@ everywhere, like a global variable.
   smoke a joint, it will take a lot for the thc to leave your body and
   nothing will change that.
 
+## Control flow
+
+if:
+unless:
+while:
+until:
+for:
+
+
 ## Planned thigns
 
 * hash tables (declared with the keyword `hashish`)
